@@ -26,4 +26,3 @@ class Post(models.Model):
         Group, blank=True, null=True,
         on_delete=models.CASCADE
     )
-        
