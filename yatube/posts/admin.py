@@ -16,13 +16,14 @@ class PostAdmin(admin.ModelAdmin):
     )
     # Это позволит изменять поле "group" в любом посте без
     # лишних движений мышкой, прямо из списка постов.
-    list_editable = ('group',)   
+    list_editable = ('group',)
     # Добовляем интерфейс для поиска по тексту постов
     search_fields = ('text',)
     # Добавляем возможность фильтрации по дате.
     list_filter = ('pub_date',)
     # На случай пустого поля
     empty_value_display = '-пусто-'
+
 
 admin.site.register(Post, PostAdmin,)
 admin.site.register(Group,)

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 
 from .models import Post, Group
 
-# Create your views here.
+
 def index(request):
     posts = Post.objects.order_by('-pub_date')[:10]
     context = {
@@ -19,3 +19,4 @@ def group_posts(request, slug):
         'posts': posts,
     }
     return render(request, 'posts/group_list.html', context)
+    
