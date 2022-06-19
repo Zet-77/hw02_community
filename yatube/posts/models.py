@@ -15,15 +15,15 @@ class Group(models.Model):
         db_index=True, verbose_name='slug'
     )
     description = models.TextField(
-    verbose_name='Описание'
+        verbose_name='Описание'
     )
-    related_name=('group')
+    related_name = ('group')
 
     class Meta:
         verbose_name_plural = 'groups'
 
     def __str__(self):
-        return self.title  
+        return self.title
 
 
 class Post(models.Model):
@@ -31,7 +31,7 @@ class Post(models.Model):
         max_length=30, verbose_name='Текст'
     )
     pub_date = models.DateTimeField(
-    auto_now_add=True, verbose_name='Дата'
+        auto_now_add=True, verbose_name='Дата'
     )
     author = models.ForeignKey(
         User,
@@ -47,11 +47,10 @@ class Post(models.Model):
     )
 
     def __str__(self):
-        return self.text 
+        return self.text
 
-    
     class Meta:
         ordering = ('-pub_date',)
-        verbose_name_plural='posts'
+        verbose_name_plural = 'posts'
 
-    
+
