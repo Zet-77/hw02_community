@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
-from django.conf import settings
-from django.db import models
 
+from django.db import models
 
 
 User = get_user_model()
@@ -19,7 +18,7 @@ class Group(models.Model):
     description = models.TextField(
         verbose_name='Описание'
     )
-    
+
     class Meta:
         verbose_name_plural = 'Группы'
 
@@ -50,7 +49,6 @@ class Post(models.Model):
     class Meta:
         ordering = ('-pub_date',)
         verbose_name_plural = 'Посты'
-
 
     def __str__(self):
         return self.text[:30]
