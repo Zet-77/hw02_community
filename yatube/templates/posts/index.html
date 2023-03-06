@@ -1,9 +1,11 @@
-{% extends 'base.html' %}
-{% block title %}Последние обновления на сайте.{% endblock %}
-  {% block content %}
-  <div class="container py-5">
-    <h1>Главная страница</h1>
-    {% for post in posts %}
+{% extends "base.html" %}
+{% block title %}Последние обновления на сайте{% endblock %}
+{% block content %}
+{% load thumbnail %}
+<div class="container py-5">
+  {% include 'includes/paginator.html' %}
+  <h2>Главная страница</h2>
+  {% for post in page_obj %}
       <article>
         <ul>
           <li>
@@ -12,15 +14,23 @@
           <li>
             Дата публикации: {{ post.pub_date|date:"d E Y" }}
           </li>
-        </ul>      
-      <p>
-        {{ post.text|linebreaks }}
-      </p>
-        {% if post.group %}
-          <a href="{% url 'posts:group_list' post.group.slug %}">{{ post.group.title }}</a> 
+          <p>
+            {{ post.text|linebreaksbr }}
+          <p>  
+          <!--<p ">-->
+            {% thumbnail post.image "450x270" crop="center" as im %}
+              <img style="border-style: solid;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+            {% endthumbnail %}
+          <p>
+          <a href="{% url 'posts:post_detail' post.id %}"> Подробная информация </a><br>
+          <a href="{% url 'posts:profile' post.author %}"> Все посты пользователя</a><br> 
+          {% if post.group %}
+          <a href="{% url 'posts:group_list' post.group.slug %}"> Все записи группы {{ post.group.title }}</a> 
           {% if not forloop.last %}<hr>{% endif %}
         {% endif %}  
-      </article>  
-    {% endfor %}
-    <hr>
-  {% endblock %} 
+      </article>
+  {% endfor %}
+  {% include 'includes/paginator.html' %}
+  <hr>
+</div>
+{% endblock %}
